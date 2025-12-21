@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Manager - Teacher Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/timetable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-effect">
+            <div class="sidebar-header">
+                <div class="institute-info">
+                    <h2 id="institute-name">Sample Institute</h2>
+                    <p class="institute-code" id="institute-code">INST001</p>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar teacher">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3 id="user-name">Teacher Name</h3>
+                        <p class="user-role">Teacher</p>
+                        <p class="teacher-code" id="teacher-code">PROF001</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-page="dashboard">
+                        <a href="#">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="timetable">
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>My Timetable</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="booking">
+                        <a href="#">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span>Book Classroom</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="availability">
+                        <a href="#">
+                            <i class="fas fa-search"></i>
+                            <span>Check Availability</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="workload">
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>My Workload</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-secondary logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header glass-effect">
+                <div class="header-left">
+                    <h1 id="page-title">Teacher Dashboard</h1>
+                    <p id="page-description">View timetable and book classrooms</p>
+                </div>
+                <div class="header-right">
+                    <div class="date-time">
+                        <span id="current-date">Monday, October 16, 2023</span>
+                        <span id="current-time">10:30 AM</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <!-- Pages will be loaded here -->
+                <div class="page active" id="page-dashboard">
+                    <!-- Teacher Dashboard Content -->
+                </div>
+                
+                <div class="page" id="page-timetable">
+                    <!-- My Timetable -->
+                </div>
+                
+                <div class="page" id="page-booking">
+                    <!-- Book Classroom -->
+                </div>
+                
+                <div class="page" id="page-availability">
+                    <!-- Check Availability -->
+                </div>
+                
+                <div class="page" id="page-workload">
+                    <!-- My Workload -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data-manager.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard-teacher.js"></script>
+    
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

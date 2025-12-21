@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Manager - Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/timetable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-effect">
+            <div class="sidebar-header">
+                <div class="institute-info">
+                    <h2 id="institute-name">Sample Institute</h2>
+                    <p class="institute-code" id="institute-code">INST001</p>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar student">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3 id="user-name">Student Name</h3>
+                        <p class="user-role">Student</p>
+                        <p class="student-info" id="student-info">CS 2nd Year - Division A</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-page="dashboard">
+                        <a href="#">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="timetable">
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>My Timetable</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="teachers">
+                        <a href="#">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Teacher Availability</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="rooms">
+                        <a href="#">
+                            <i class="fas fa-door-open"></i>
+                            <span>Available Rooms</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="resources">
+                        <a href="#">
+                            <i class="fas fa-book"></i>
+                            <span>Resources</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="calendar">
+                        <a href="#">
+                            <i class="fas fa-calendar"></i>
+                            <span>Institute Calendar</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-secondary logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header glass-effect">
+                <div class="header-left">
+                    <h1 id="page-title">Student Dashboard</h1>
+                    <p id="page-description">View timetable and institute information</p>
+                </div>
+                <div class="header-right">
+                    <div class="date-time">
+                        <span id="current-date">Monday, October 16, 2023</span>
+                        <span id="current-time">10:30 AM</span>
+                    </div>
+                    <div class="student-id" id="student-id">
+                        Roll No: CS2001
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <!-- Pages will be loaded here -->
+                <div class="page active" id="page-dashboard">
+                    <!-- Student Dashboard Content -->
+                </div>
+                
+                <div class="page" id="page-timetable">
+                    <!-- My Timetable -->
+                </div>
+                
+                <div class="page" id="page-teachers">
+                    <!-- Teacher Availability -->
+                </div>
+                
+                <div class="page" id="page-rooms">
+                    <!-- Available Rooms -->
+                </div>
+                
+                <div class="page" id="page-resources">
+                    <!-- Resources -->
+                </div>
+                
+                <div class="page" id="page-calendar">
+                    <!-- Institute Calendar -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data-manager.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard-student.js"></script>
+</body>
+</html>

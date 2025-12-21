@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Manager - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-glass">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <h1>Institute Manager</h1>
+                </div>
+                <p class="subtitle">Manage your educational institution efficiently</p>
+            </div>
+            
+            <div class="login-progress">
+                <div class="progress-step active" id="step1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Institute</span>
+                </div>
+                <div class="progress-step" id="step2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Role</span>
+                </div>
+                <div class="progress-step" id="step3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Credentials</span>
+                </div>
+            </div>
+            
+            <!-- Institute Login Form -->
+            <div class="login-form active" id="institute-form">
+                <h2>Institute Login</h2>
+                <p class="form-description">Enter your institute code and password</p>
+                
+                <div class="form-group">
+                    <label for="institute-code">
+                        <i class="fas fa-hashtag"></i> Institute Code
+                    </label>
+                    <input type="text" id="institute-code" placeholder="e.g., INST001" autocomplete="off">
+                    <div class="form-hint">Unique code assigned to your institute</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="institute-password">
+                        <i class="fas fa-key"></i> Institute Password
+                    </label>
+                    <input type="password" id="institute-password" placeholder="Enter institute password">
+                    <div class="form-hint">Non-changeable password for your institute</div>
+                </div>
+                
+                <div class="sample-logins">
+                    <h3>Sample Institutes</h3>
+                    <div class="sample-buttons">
+                        <button class="sample-btn" data-code="INST001" data-password="inst@123">
+                            <i class="fas fa-database"></i> INST001 (With Sample Data)
+                        </button>
+                        <button class="sample-btn" data-code="INST002" data-password="inst@456">
+                            <i class="fas fa-file"></i> INST002 (Empty Institute)
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="btn-primary" id="btn-institute-login">
+                    <i class="fas fa-arrow-right"></i> Continue to Role Selection
+                </button>
+                
+                <div class="login-footer">
+                    <p><i class="fas fa-info-circle"></i> Contact system administrator for institute code</p>
+                </div>
+            </div>
+            
+            <!-- Role Selection Form -->
+            <div class="login-form" id="role-form">
+                <h2>Select Your Role</h2>
+                <p class="form-description">Choose how you want to access the system</p>
+                
+                <div class="role-selection">
+                    <div class="role-card" data-role="admin">
+                        <div class="role-icon admin">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>Administrator</h3>
+                        <p>Full system access, timetable management, infrastructure control</p>
+                        <div class="role-features">
+                            <span><i class="fas fa-check"></i> Manage Timetable</span>
+                            <span><i class="fas fa-check"></i> Edit Infrastructure</span>
+                            <span><i class="fas fa-check"></i> User Management</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="teacher">
+                        <div class="role-icon teacher">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Teacher</h3>
+                        <p>Book classrooms, view timetable, check availability</p>
+                        <div class="role-features">
+                            <span><i class="fas fa-check"></i> Book Classrooms</span>
+                            <span><i class="fas fa-check"></i> View Timetable</span>
+                            <span><i class="fas fa-check"></i> Check Availability</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="student">
+                        <div class="role-icon student">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Student</h3>
+                        <p>View timetable, check teacher availability, access resources</p>
+                        <div class="role-features">
+                            <span><i class="fas fa-check"></i> View Timetable</span>
+                            <span><i class="fas fa-check"></i> Teacher Availability</span>
+                            <span><i class="fas fa-check"></i> Access Resources</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn-secondary" id="btn-back-to-institute">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-primary" id="btn-proceed-to-login">
+                        Proceed to Login <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Login Form -->
+            <div class="login-form" id="user-form">
+                <h2 id="role-title">User Login</h2>
+                <p class="form-description" id="role-description">Enter your credentials</p>
+                
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> Username
+                    </label>
+                    <input type="text" id="username" placeholder="Enter username" autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="password" placeholder="Enter password">
+                </div>
+                
+                <div class="sample-logins">
+                    <h3>Sample Logins for <span id="current-role">Admin</span></h3>
+                    <div class="sample-buttons" id="user-samples">
+                        <!-- Sample logins will be populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn-secondary" id="btn-back-to-role">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn-primary" id="btn-user-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+            </div>
+            
+            <div class="login-status" id="login-status"></div>
+        </div>
+        
+        <div class="login-background">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <script src="js/data-manager.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

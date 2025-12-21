@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute Manager - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/timetable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-effect">
+            <div class="sidebar-header">
+                <div class="institute-info">
+                    <h2 id="institute-name">Sample Institute</h2>
+                    <p class="institute-code" id="institute-code">INST001</p>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3 id="user-name">Administrator</h3>
+                        <p class="user-role">Admin</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-page="dashboard">
+                        <a href="#">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="timetable">
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Timetable Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="master-timetable">
+                        <a href="#">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Master Timetable</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="departments">
+                        <a href="#">
+                            <i class="fas fa-building"></i>
+                            <span>Manage Departments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="infrastructure">
+                        <a href="#">
+                            <i class="fas fa-warehouse"></i>
+                            <span>Manage Infrastructure</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="teachers">
+                        <a href="#">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Manage Teachers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="rooms">
+                        <a href="#">
+                            <i class="fas fa-door-open"></i>
+                            <span>Available Rooms</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="workload">
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Teacher Workload</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="export">
+                        <a href="#">
+                            <i class="fas fa-file-export"></i>
+                            <span>Export Data</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-secondary logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header glass-effect">
+                <div class="header-left">
+                    <h1 id="page-title">Admin Dashboard</h1>
+                    <p id="page-description">Manage your institute efficiently</p>
+                </div>
+                <div class="header-right">
+                    <div class="date-time">
+                        <span id="current-date">Monday, October 16, 2023</span>
+                        <span id="current-time">10:30 AM</span>
+                    </div>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <!-- Dashboard Page -->
+                <div class="page active" id="page-dashboard">
+                    <div class="page-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                        <p>Welcome to the Institute Manager admin panel</p>
+                    </div>
+                    
+                    <div class="dashboard-widgets">
+                        <!-- Widget 1: Quick Stats -->
+                        <div class="widget stats-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">
+                                    <i class="fas fa-chart-line"></i> Quick Stats
+                                </h3>
+                                <span class="badge badge-primary">Today</span>
+                            </div>
+                            <div class="widget-content">
+                                <div class="stats-grid">
+                                    <div class="stat-card">
+                                        <div class="stat-icon teacher">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <h4 id="teacher-count">0</h4>
+                                            <p>Teachers</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon student">
+                                            <i class="fas fa-user-graduate"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <h4 id="department-count">0</h4>
+                                            <p>Departments</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon room">
+                                            <i class="fas fa-door-open"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <h4 id="room-count">0</h4>
+                                            <p>Classrooms</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon booking">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <h4 id="booking-count">0</h4>
+                                            <p>Today's Bookings</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Widget 2: Available Rooms -->
+                        <div class="widget rooms-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">
+                                    <i class="fas fa-door-closed"></i> Available Rooms Now
+                                </h3>
+                                <button class="btn-secondary btn-sm" id="refresh-rooms">
+                                    <i class="fas fa-sync-alt"></i> Refresh
+                                </button>
+                            </div>
+                            <div class="widget-content">
+                                <div class="rooms-list" id="available-rooms-list">
+                                    <!-- Rooms will be loaded here -->
+                                </div>
+                                <div class="widget-footer">
+                                    <a href="#" class="view-all-link" data-page="rooms">
+                                        View all rooms <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Widget 3: Timetable Conflicts -->
+                        <div class="widget conflicts-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">
+                                    <i class="fas fa-exclamation-triangle"></i> Timetable Conflicts
+                                </h3>
+                                <span class="badge badge-danger" id="conflict-count">0</span>
+                            </div>
+                            <div class="widget-content">
+                                <div class="conflicts-list" id="conflicts-list">
+                                    <!-- Conflicts will be loaded here -->
+                                </div>
+                                <div class="widget-footer">
+                                    <button class="btn-secondary btn-sm" id="resolve-conflicts">
+                                        <i class="fas fa-wrench"></i> Resolve Conflicts
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Widget 4: Quick Actions -->
+                        <div class="widget actions-widget">
+                            <div class="widget-header">
+                                <h3 class="widget-title">
+                                    <i class="fas fa-bolt"></i> Quick Actions
+                                </h3>
+                            </div>
+                            <div class="widget-content">
+                                <div class="actions-grid">
+                                    <button class="action-btn" data-page="timetable">
+                                        <i class="fas fa-calendar-plus"></i>
+                                        <span>Edit Timetable</span>
+                                    </button>
+                                    <button class="action-btn" data-page="infrastructure">
+                                        <i class="fas fa-plus-circle"></i>
+                                        <span>Add Classroom</span>
+                                    </button>
+                                    <button class="action-btn" data-page="teachers">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Add Teacher</span>
+                                    </button>
+                                    <button class="action-btn" data-page="export">
+                                        <i class="fas fa-file-export"></i>
+                                        <span>Export Data</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activities -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-history"></i> Recent Activities
+                            </h3>
+                            <button class="btn-secondary btn-sm" id="refresh-activities">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="activities-list" id="activities-list">
+                                <!-- Activities will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other pages will be loaded here -->
+                <div class="page" id="page-timetable">
+                    <!-- Timetable Management Page -->
+                </div>
+                
+                <div class="page" id="page-master-timetable">
+                    <!-- Master Timetable Page -->
+                </div>
+                
+                <div class="page" id="page-departments">
+                    <!-- Manage Departments Page -->
+                </div>
+                
+                <div class="page" id="page-infrastructure">
+                    <!-- Manage Infrastructure Page -->
+                </div>
+                
+                <div class="page" id="page-teachers">
+                    <!-- Manage Teachers Page -->
+                </div>
+                
+                <div class="page" id="page-rooms">
+                    <!-- Available Rooms Page -->
+                </div>
+                
+                <div class="page" id="page-workload">
+                    <!-- Teacher Workload Page -->
+                </div>
+                
+                <div class="page" id="page-export">
+                    <!-- Export Data Page -->
+                </div>
+            </div>
+        </main>
+        
+        <!-- Notification Panel -->
+        <div class="notification-panel glass-effect">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="btn-secondary btn-sm" id="clear-notifications">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+            <div class="notification-list" id="notification-list">
+                <!-- Notifications will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data-manager.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard-admin.js"></script>
+    
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+/* Timetable Styles */
+.timetable-container {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.timetable-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--light-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.timetable-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.timetable-filter {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--light-border);
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    min-width: 120px;
+}
+
+/* Main Timetable */
+.timetable-main {
+    overflow-x: auto;
+    padding: var(--spacing-md);
+}
+
+.timetable {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.timetable th {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-primary);
+    border: 1px solid var(--light-border);
+    position: relative;
+    min-width: 120px;
+}
+
+.timetable th.period-header {
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    padding: 12px;
+}
+
+.timetable th.time-header {
+    background: rgba(114, 9, 183, 0.1);
+    color: var(--admin-color);
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+}
+
+.timetable td {
+    padding: 0;
+    border: 1px solid var(--light-border);
+    vertical-align: top;
+    height: 80px;
+    transition: all 0.3s ease;
+}
+
+/* Timetable Cell */
+.timetable-cell {
+    height: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.timetable-cell:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.timetable-cell.empty {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.timetable-cell.booked {
+    background: rgba(247, 37, 133, 0.05);
+    border-left: 3px solid var(--danger-color);
+}
+
+.timetable-cell.available {
+    background: rgba(76, 201, 240, 0.05);
+    border-left: 3px solid var(--success-color);
+}
+
+.timetable-cell.selected {
+    background: rgba(67, 97, 238, 0.1);
+    border: 2px solid var(--primary-color) !important;
+}
+
+.timetable-cell.merged {
+    background: rgba(114, 9, 183, 0.1);
+    border-left: 3px solid var(--admin-color);
+}
+
+.timetable-cell-content {
+    overflow: hidden;
+}
+
+.timetable-cell-subject {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.timetable-cell-teacher {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.timetable-cell-room {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.timetable-cell-type {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.timetable-cell-type.theory {
+    color: var(--primary-color);
+}
+
+.timetable-cell-type.lab {
+    color: var(--danger-color);
+}
+
+.timetable-cell-type.other {
+    color: var(--text-muted);
+}
+
+/* Timetable Editor */
+.timetable-editor {
+    position: relative;
+}
+
+.timetable-editor .timetable-cell {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.timetable-editor .timetable-cell:hover {
+    background: rgba(67, 97, 238, 0.1);
+    transform: scale(1.02);
+}
+
+.timetable-editor .timetable-cell.editing {
+    background: rgba(114, 9, 183, 0.2);
+    border: 2px solid var(--admin-color) !important;
+}
+
+.timetable-editor .timetable-cell.merge-start {
+    background: rgba(76, 201, 240, 0.2);
+    border: 2px solid var(--success-color) !important;
+}
+
+.timetable-editor .timetable-cell.merge-end {
+    background: rgba(247, 37, 133, 0.2);
+    border: 2px solid var(--danger-color) !important;
+}
+
+/* Edit Controls */
+.edit-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.timetable-cell:hover .edit-controls {
+    opacity: 1;
+}
+
+.edit-btn, .merge-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+    background: var(--primary-color);
+}
+
+.merge-btn:hover {
+    background: var(--admin-color);
+}
+
+/* Timetable Sidebar */
+.timetable-sidebar {
+    width: 300px;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 1px solid var(--light-border);
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+}
+
+.timetable-details {
+    margin-bottom: var(--spacing-lg);
+}
+
+.timetable-details h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-item label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.detail-item p {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Subject List */
+.subject-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.subject-item {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border-left: 3px solid var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.subject-item:hover {
+    background: rgba(67, 97, 238, 0.1);
+    transform: translateX(5px);
+}
+
+.subject-item.selected {
+    background: rgba(67, 97, 238, 0.2);
+    border-left-color: var(--admin-color);
+}
+
+.subject-item h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.subject-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* Merge Indicator */
+.merge-indicator {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    font-size: 0.7rem;
+    color: var(--admin-color);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+/* Timetable Legend */
+.timetable-legend {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-color.theory {
+    background: var(--primary-color);
+}
+
+.legend-color.lab {
+    background: var(--danger-color);
+}
+
+.legend-color.available {
+    background: var(--success-color);
+}
+
+.legend-color.booked {
+    background: var(--danger-color);
+}
+
+.legend-color.merged {
+    background: var(--admin-color);
+}
+
+/* Responsive Timetable */
+@media (max-width: 1200px) {
+    .timetable-container {
+        flex-direction: column;
+    }
+    
+    .timetable-sidebar {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid var(--light-border);
+    }
+}
+
+@media (max-width: 768px) {
+    .timetable-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .timetable-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .timetable-filter {
+        width: 100%;
+    }
+    
+    .filter-select {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .timetable th {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+    }
+    
+    .timetable-cell {
+        padding: 6px;
+    }
+    
+    .timetable-cell-subject {
+        font-size: 0.8rem;
+    }
+    
+    .timetable-cell-teacher,
+    .timetable-cell-room {
+        font-size: 0.75rem;
+    }
+}
+
+/* Master Timetable View */
+.master-timetable-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.master-timetable-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid var(--light-border);
+}
+
+.master-timetable-header {
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--light-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.master-timetable-header h4 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.master-timetable-body {
+    padding: var(--spacing-md);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Teacher Availability */
+.availability-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.availability-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    border: 1px solid var(--light-border);
+}
+
+.availability-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.availability-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.availability-status.available {
+    background: var(--success-color);
+    animation: pulse 2s infinite;
+}
+
+.availability-status.busy {
+    background: var(--danger-color);
+}
+
+.availability-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+.schedule-time {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.schedule-subject {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
