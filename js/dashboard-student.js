@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const institute = session.institute;
     
     // Initialize dashboard
-    initDashboard();
+    
     
     // DOM Elements
     const navItems = document.querySelectorAll('.nav-item');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     
     // Functions
-    
+    initDashboard();
     function initDashboard() {
         // Get student timetable based on user data
         const year = user.year || 2;
