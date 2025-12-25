@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Load available rooms
         loadAvailableRooms();
         
-        // Load timetable conflicts
+        // Load timetable conflictss
         loadTimetableConflicts();
         
         // Load recent activities
