@@ -259,8 +259,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const page = this.getAttribute('data-page');
                 if (!page) return;
-                
-                // Update active nav item
+                 const refreshBtn = document.getElementById('refresh-data-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            if (confirm('This will reset all data to the latest sample data. Are you sure?')) {
+                DataManager.forceRefreshData();
+            }
+        });
+      }
+                                // Update active nav item
                 navItems.forEach(nav => nav.classList.remove('active'));
                 this.classList.add('active');
                 

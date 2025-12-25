@@ -989,3 +989,25 @@
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+/* Add these styles */
+.btn-warning {
+    background: #ff9e00;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-warning:hover {
+    background: #ff7b00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 158, 0, 0.3);
+}
