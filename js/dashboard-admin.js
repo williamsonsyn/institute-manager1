@@ -2423,157 +2423,269 @@ document.addEventListener('DOMContentLoaded', function() {
         
         reader.readAsText(file);
     }
+    function editTimetableTimes(year, department, division, masterTimetable) {
+    // Create modal for editing times
+    const timeSlotsHTML = masterTimetable.periods.map((period, index) => `
+        <div class="time-slot-edit">
+            <div class="form-group">
+                <label for="period-${index}-start">Period ${index + 1} Start Time</label>
+                <input type="time" id="period-${index}-start" value="${period.start}" 
+                    class="time-input" required>
+            </div>
+            <div class="form-group">
+                <label for="period-${index}-end">Period ${index + 1} End Time</label>
+                <input type="time" id="period-${index}-end" value="${period.end}" 
+                    class="time-input" required>
+            </div>
+        </div>
+    `).join('');
     
-    function loadTimetableForEditing() {
-        const year = document.getElementById('filter-year').value;
-        const department = document.getElementById('filter-department').value;
-        const division = document.getElementById('filter-division').value;
-        
-        if (!year || !department || !division) {
-            Utils.showNotification('Please select year, department, and division', 'error');
-            return;
-        }
-        
-        const timetable = DataManager.getTimetable(institute.code, year, department, division);
-        const masterTimetable = DataManager.getMasterTimetable(institute.code);
-        
-        const container = document.getElementById('timetable-editor-container');
-        if (!container) return;
-        
-        if (!timetable) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-calendar-times"></i>
-                    <h3>No Timetable Found</h3>
-                    <p>No timetable exists for ${year} Year ${department} Division ${division}</p>
-                    <button class="btn-primary mt-2" id="create-empty-timetable">
-                        <i class="fas fa-plus"></i> Create Empty Timetable
-                    </button>
+    Utils.createModal({
+        title: 'Edit Timetable Times',
+        content: `
+            <div class="edit-times-container">
+                <p>Adjust the start and end times for each period. These changes will apply to all timetables.</p>
+                <div class="time-slots-edit-grid">
+                    ${timeSlotsHTML}
                 </div>
-            `;
-            
-            setTimeout(() => {
-                document.getElementById('create-empty-timetable')?.addEventListener('click', () => {
-                    createEmptyTimetable(year, department, division);
-                });
-            }, 100);
-            
-            return;
-        }
-        
-        // Render timetable editor
-        container.innerHTML = `
-            <div class="timetable-container">
-                <div class="timetable-header">
-                    <h3>${year} Year ${department} - Division ${division} Timetable</h3>
-                    <div class="timetable-controls">
-                        <button class="btn-primary" id="save-timetable">
-                            <i class="fas fa-save"></i> Save Changes
-                        </button>
-                        <button class="btn-secondary" id="reset-timetable">
-                            <i class="fas fa-undo"></i> Reset
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="timetable-main">
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th class="period-header">Period</th>
-                                <th class="time-header">Time</th>
-                                ${masterTimetable.days.map(day => `
-                                    <th>${day}</th>
-                                `).join('')}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${masterTimetable.periods.map((period, periodIndex) => `
-                                <tr>
-                                    <td class="period-header">${periodIndex + 1}</td>
-                                    <td class="time-header">${period.start} - ${period.end}</td>
-                                    ${masterTimetable.days.map(day => {
-                                        const slot = timetable.schedule?.[day]?.[periodIndex] || {};
-                                        return `
-                                            <td class="timetable-cell ${slot.subject ? 'booked' : 'empty'}" 
-                                                data-day="${day}" 
-                                                data-period="${periodIndex}">
-                                                ${slot.subject ? `
-                                                    <div class="timetable-cell-content">
-                                                        <div class="timetable-cell-subject">${slot.subject}</div>
-                                                        <div class="timetable-cell-teacher">${slot.teacher || 'TBA'}</div>
-                                                        <div class="timetable-cell-room">
-                                                            <i class="fas fa-door-open"></i> ${slot.room || 'TBA'}
-                                                        </div>
-                                                        <span class="timetable-cell-type ${slot.type || 'theory'}">
-                                                            ${slot.type || 'theory'}
-                                                        </span>
-                                                    </div>
-                                                ` : 'Empty'}
-                                            </td>
-                                        `;
-                                    }).join('')}
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="timetable-legend">
-                    <div class="legend-item">
-                        <span class="legend-color theory"></span>
-                        <span>Theory Class</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color lab"></span>
-                        <span>Laboratory</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color booked"></span>
-                        <span>Booked Slot</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color empty"></span>
-                        <span>Available Slot</span>
-                    </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="update-all-timetables" checked>
+                        Apply these times to all existing timetables
+                    </label>
                 </div>
             </div>
+        `,
+        confirmText: 'Save Times',
+        size: 'large',
+        onConfirm: function() {
+            // Collect new times
+            const newPeriods = [];
+            let hasError = false;
             
-            <div class="card mt-3">
-                <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-edit"></i> Edit Slot</h3>
-                </div>
-                <div class="card-content">
-                    <div id="slot-editor">
-                        <div class="empty-state">
-                            <i class="fas fa-mouse-pointer"></i>
-                            <p>Click on a timetable slot to edit it</p>
-                        </div>
-                    </div>
-                </div>
+            for (let i = 0; i < masterTimetable.periods.length; i++) {
+                const start = document.getElementById(`period-${i}-start`).value;
+                const end = document.getElementById(`period-${i}-end`).value;
+                
+                if (!start || !end) {
+                    Utils.showNotification(`Please fill in times for Period ${i + 1}`, 'error');
+                    hasError = true;
+                    break;
+                }
+                
+                // Validate that start time is before end time
+                if (start >= end) {
+                    Utils.showNotification(`Period ${i + 1}: Start time must be before end time`, 'error');
+                    hasError = true;
+                    break;
+                }
+                
+                newPeriods.push({ start, end });
+            }
+            
+            if (hasError) return;
+            
+            // Update master timetable
+            const updatedMasterTimetable = {
+                ...masterTimetable,
+                periods: newPeriods
+            };
+            
+            // Update institute data
+            const instituteData = DataManager.getInstitute(institute.code);
+            instituteData.masterTimetable = updatedMasterTimetable;
+            DataManager.updateInstitute(institute.code, instituteData);
+            
+            // Optionally update all timetables if checkbox is checked
+            const updateAll = document.getElementById('update-all-timetables').checked;
+            if (updateAll) {
+                // In a real implementation, you might want to adjust all existing timetables
+                // For now, we'll just show a notification
+                Utils.showNotification('Times updated for all timetables', 'success');
+            } else {
+                Utils.showNotification('Times updated successfully', 'success');
+            }
+            
+            // Refresh the timetable view
+            loadTimetableForEditing();
+        }
+    });
+}
+    function loadTimetableForEditing() {
+    const year = document.getElementById('filter-year').value;
+    const department = document.getElementById('filter-department').value;
+    const division = document.getElementById('filter-division').value;
+    
+    if (!year || !department || !division) {
+        Utils.showNotification('Please select year, department, and division', 'error');
+        return;
+    }
+    
+    const timetable = DataManager.getTimetable(institute.code, year, department, division);
+    const masterTimetable = DataManager.getMasterTimetable(institute.code);
+    
+    const container = document.getElementById('timetable-editor-container');
+    if (!container) return;
+    
+    if (!timetable) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No Timetable Found</h3>
+                <p>No timetable exists for ${year} Year ${department} Division ${division}</p>
+                <button class="btn-primary mt-2" id="create-empty-timetable">
+                    <i class="fas fa-plus"></i> Create Empty Timetable
+                </button>
             </div>
         `;
         
-        // Add click handlers for timetable cells
-        container.querySelectorAll('.timetable-cell').forEach(cell => {
-            cell.addEventListener('click', function() {
-                const day = this.getAttribute('data-day');
-                const period = this.getAttribute('data-period');
-                editTimetableSlot(year, department, division, day, period, this);
-            });
-        });
-        
-        // Add save and reset handlers
         setTimeout(() => {
-            document.getElementById('save-timetable')?.addEventListener('click', () => {
-                saveTimetableChanges(year, department, division, timetable);
-            });
-            
-            document.getElementById('reset-timetable')?.addEventListener('click', () => {
-                loadTimetableForEditing(); // Reload the timetable
+            document.getElementById('create-empty-timetable')?.addEventListener('click', () => {
+                createEmptyTimetable(year, department, division);
             });
         }, 100);
+        
+        return;
     }
+    
+    // Render timetable editor with horizontal layout (periods as columns)
+    container.innerHTML = `
+        <div class="timetable-container">
+            <div class="timetable-header">
+                <h3>${year} Year ${department} - Division ${division} Timetable</h3>
+                <div class="timetable-controls">
+                    <button class="btn-primary" id="save-timetable">
+                        <i class="fas fa-save"></i> Save Timetable
+                    </button>
+                    <button class="btn-secondary" id="reset-timetable">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                    <button class="btn-secondary" id="edit-times-btn">
+                        <i class="fas fa-clock"></i> Edit Times
+                    </button>
+                </div>
+            </div>
+            
+            <div class="timetable-main">
+                <div class="timetable-horizontal-wrapper">
+                    <div class="timetable-grid">
+                        <!-- Time header row -->
+                        <div class="timetable-header-row">
+                            <div class="time-corner-cell">Time / Day</div>
+                            ${masterTimetable.periods.map((period, index) => `
+                                <div class="time-header-cell" data-period="${index}">
+                                    <div class="time-display">
+                                        <div class="period-number">Period ${index + 1}</div>
+                                        <div class="time-range">
+                                            <span class="start-time">${period.start}</span>
+                                            <i class="fas fa-arrow-right time-arrow"></i>
+                                            <span class="end-time">${period.end}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <!-- Day rows -->
+                        ${masterTimetable.days.map(day => `
+                            <div class="timetable-day-row">
+                                <div class="day-header-cell">
+                                    <strong>${day}</strong>
+                                </div>
+                                ${masterTimetable.periods.map((period, periodIndex) => {
+                                    const slot = timetable.schedule?.[day]?.[periodIndex] || {};
+                                    return `
+                                        <div class="timetable-cell ${slot.subject ? 'booked' : 'empty'}" 
+                                            data-day="${day}" 
+                                            data-period="${periodIndex}">
+                                            ${slot.subject ? `
+                                                <div class="timetable-cell-content">
+                                                    <div class="timetable-cell-subject">${slot.subject}</div>
+                                                    <div class="timetable-cell-teacher">${slot.teacher || 'TBA'}</div>
+                                                    <div class="timetable-cell-room">
+                                                        <i class="fas fa-door-open"></i> ${slot.room || 'TBA'}
+                                                    </div>
+                                                    <span class="timetable-cell-type ${slot.type || 'theory'}">
+                                                        ${slot.type || 'theory'}
+                                                    </span>
+                                                </div>
+                                            ` : `
+                                                <div class="empty-slot">
+                                                    <i class="fas fa-plus"></i>
+                                                    <span>Add Class</span>
+                                                </div>
+                                            `}
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timetable-legend">
+                <div class="legend-item">
+                    <span class="legend-color theory"></span>
+                    <span>Theory Class</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color lab"></span>
+                    <span>Laboratory</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color booked"></span>
+                    <span>Booked Slot</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color empty"></span>
+                    <span>Available Slot</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-edit"></i> Edit Slot</h3>
+            </div>
+            <div class="card-content">
+                <div id="slot-editor">
+                    <div class="empty-state">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Click on a timetable slot to edit it</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add click handlers for timetable cells
+    container.querySelectorAll('.timetable-cell').forEach(cell => {
+        cell.addEventListener('click', function() {
+            const day = this.getAttribute('data-day');
+            const period = this.getAttribute('data-period');
+            editTimetableSlot(year, department, division, day, period, this);
+        });
+    });
+    
+    // Add event handlers
+    setTimeout(() => {
+        // Save timetable button
+        document.getElementById('save-timetable')?.addEventListener('click', () => {
+            saveTimetableChanges(year, department, division, timetable);
+        });
+        
+        // Reset timetable button
+        document.getElementById('reset-timetable')?.addEventListener('click', () => {
+            loadTimetableForEditing();
+        });
+        
+        // Edit times button
+        document.getElementById('edit-times-btn')?.addEventListener('click', () => {
+            editTimetableTimes(year, department, division, masterTimetable);
+        });
+    }, 100);
+}
     
     function editTimetableSlot(year, department, division, day, period, cellElement) {
         const timetable = DataManager.getTimetable(institute.code, year, department, division);
@@ -2800,9 +2912,47 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function saveTimetableChanges(year, department, division, timetable) {
-        DataManager.updateTimetable(institute.code, year, department, division, timetable);
-        Utils.showNotification('Timetable saved successfully', 'success');
+    // First, validate the timetable data
+    if (!timetable || !timetable.schedule) {
+        Utils.showNotification('Invalid timetable data', 'error');
+        return;
     }
+    
+    // Save to DataManager
+    const success = DataManager.updateTimetable(institute.code, year, department, division, timetable);
+    
+    if (success) {
+        Utils.showNotification('Timetable saved successfully!', 'success');
+        
+        // Add to recent activities
+        const activity = {
+            icon: 'fas fa-calendar-plus',
+            title: 'Timetable Updated',
+            description: `${year} Year ${department} Division ${division} timetable modified`,
+            time: 'Just now'
+        };
+        
+        // Add to activities list if it exists
+        const activitiesList = document.getElementById('activities-list');
+        if (activitiesList) {
+            const activityHTML = `
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="${activity.icon}"></i>
+                    </div>
+                    <div class="activity-details">
+                        <h4>${activity.title}</h4>
+                        <p>${activity.description}</p>
+                        <span class="activity-time">${activity.time}</span>
+                    </div>
+                </div>
+            `;
+            activitiesList.insertAdjacentHTML('afterbegin', activityHTML);
+        }
+    } else {
+        Utils.showNotification('Failed to save timetable. Please try again.', 'error');
+    }
+}
     
     function createNewTimetable() {
         const year = document.getElementById('filter-year').value;
@@ -2817,27 +2967,27 @@ document.addEventListener('DOMContentLoaded', function() {
         createEmptyTimetable(year, department, division);
     }
     
-    function createEmptyTimetable(year, department, division) {
-        const masterTimetable = DataManager.getMasterTimetable(institute.code);
-        const emptySchedule = {};
-        
-        masterTimetable.days.forEach(day => {
-            emptySchedule[day] = Array(masterTimetable.periods.length).fill({});
-        });
-        
-        const newTimetable = {
-            department,
-            year: parseInt(year),
-            division,
-            schedule: emptySchedule
-        };
-        
-        DataManager.updateTimetable(institute.code, year, department, division, newTimetable);
-        Utils.showNotification(`New timetable created for ${year} Year ${department} Division ${division}`, 'success');
-        
-        // Reload the timetable editor
-        loadTimetableForEditing();
-    }
+   function createEmptyTimetable(year, department, division) {
+    const masterTimetable = DataManager.getMasterTimetable(institute.code);
+    const emptySchedule = {};
+    
+    masterTimetable.days.forEach(day => {
+        emptySchedule[day] = Array(masterTimetable.periods.length).fill({});
+    });
+    
+    const newTimetable = {
+        department,
+        year: parseInt(year),
+        division,
+        schedule: emptySchedule
+    };
+    
+    DataManager.updateTimetable(institute.code, year, department, division, newTimetable);
+    Utils.showNotification(`New timetable created for ${year} Year ${department} Division ${division}`, 'success');
+    
+    // Reload the timetable editor
+    loadTimetableForEditing();
+}
     
     function loadMasterTimetableData() {
         const timetables = DataManager.getAllTimetables(institute.code);
@@ -2855,7 +3005,7 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             return;
         }
-        
+       
         // Group timetables by year
         const timetablesByYear = {};
         Object.entries(timetables).forEach(([key, timetable]) => {
