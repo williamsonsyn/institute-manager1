@@ -87,33 +87,252 @@ const DataManager = {
                     // Sample Timetable Data
                     timetables: {
                         // Year 1 CS
-                        "1-CS-A": {
-                            department: "CS",
-                            year: 1,
-                            division: "A",
-                            schedule: {
-                                Monday: [
-                                    { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
-                                    { subject: "Physics", teacher: "T003", room: "R005", type: "lab" },
-                                    { subject: "Programming Basics", teacher: "T002", room: "R003", type: "lab" },
-                                    { subject: "English", teacher: "T004", room: "R002", type: "theory" },
-                                    { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
-                                    { subject: "Engineering Drawing", teacher: "T005", room: "R004", type: "theory" },
-                                    { subject: "Library", teacher: "", room: "LIB", type: "other" }
-                                ],
-                                Tuesday: [
-                                    { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
-                                    { subject: "Chemistry", teacher: "T006", room: "R006", type: "lab" },
-                                    { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
-                                    { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
-                                    { subject: "Workshop", teacher: "T005", room: "WS001", type: "lab" },
-                                    { subject: "Physics", teacher: "T003", room: "R005", type: "lab" },
-                                    { subject: "Sports", teacher: "", room: "Ground", type: "other" }
-                                ],
-                                // ... other days
-                            }
-                        },
+                       "1-CS-A": {
+    department: "CS",
+    year: 1,
+    division: "A",
+    schedule: {
+        Monday: [
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Physics", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Programming Basics", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "English", teacher: "T004", room: "R002", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Engineering Drawing", teacher: "T005", room: "R004", type: "theory" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ],
+        Tuesday: [
+            { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
+            { subject: "Chemistry", teacher: "T006", room: "R006", type: "lab" },
+            { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Workshop", teacher: "T005", room: "WS001", type: "lab" },
+            { subject: "Physics", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Sports", teacher: "", room: "Ground", type: "other" }
+        ],
+        Wednesday: [
+            { subject: "Chemistry", teacher: "T006", room: "R002", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Programming Basics Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
+            { subject: "English", teacher: "T004", room: "R005", type: "theory" },
+            { subject: "Tutorial", teacher: "T001", room: "R001", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" }
+        ],
+        Thursday: [
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Physics Lab", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Chemistry", teacher: "T006", room: "R004", type: "theory" },
+            { subject: "English Lab", teacher: "T004", room: "R002", type: "lab" },
+            { subject: "Chemistry Lab", teacher: "T006", room: "R006", type: "lab" },
+            { subject: "Club Activity", teacher: "", room: "Auditorium", type: "other" }
+        ],
+        Friday: [
+            { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
+            { subject: "Chemistry", teacher: "T006", room: "R001", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Tutorial", teacher: "T003", room: "R002", type: "tutorial" },
+            { subject: "Engineering Drawing Lab", teacher: "T005", room: "R004", type: "lab" },
+            { subject: "Mentor Session", teacher: "", room: "R005", type: "other" }
+        ],
+        Saturday: [
+            { subject: "Physics Lab", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Chemistry Lab", teacher: "T006", room: "R006", type: "lab" },
+            { subject: "Programming Basics Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "English", teacher: "T004", room: "R002", type: "theory" },
+            { subject: "Tutorial", teacher: "T006", room: "R004", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ]
+    }
+},
                         // More timetable data would be here
+                        // Add this code in the timetables object after the "1-CS-A" timetable
+"2-CS-A": {
+    department: "CS",
+    year: 2,
+    division: "A",
+    schedule: {
+        Monday: [
+            { subject: "Data Structures", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Data Structures Lab", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Discrete Mathematics", teacher: "T002", room: "R002", type: "theory" },
+            { subject: "Digital Electronics", teacher: "T004", room: "R004", type: "theory" },
+            { subject: "Digital Electronics Lab", teacher: "T004", room: "R008", type: "lab" },
+            { subject: "Communication Skills", teacher: "T003", room: "R005", type: "theory" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ],
+        Tuesday: [
+            { subject: "Discrete Mathematics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Data Structures", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Object Oriented Programming", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Digital Electronics", teacher: "T004", room: "R004", type: "theory" },
+            { subject: "Workshop", teacher: "T005", room: "WS001", type: "lab" },
+            { subject: "Physics Lab", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Sports", teacher: "", room: "Ground", type: "other" }
+        ],
+        Wednesday: [
+            { subject: "Data Structures", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Discrete Mathematics", teacher: "T002", room: "R002", type: "theory" },
+            { subject: "Digital Electronics Lab", teacher: "T004", room: "R008", type: "lab" },
+            { subject: "Object Oriented Programming", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Communication Skills", teacher: "T003", room: "R005", type: "theory" },
+            { subject: "Tutorial", teacher: "T001", room: "R001", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" }
+        ],
+        Thursday: [
+            { subject: "Discrete Mathematics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Data Structures Lab", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Digital Electronics", teacher: "T004", room: "R004", type: "theory" },
+            { subject: "Object Oriented Programming", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Communication Skills Lab", teacher: "T003", room: "R002", type: "lab" },
+            { subject: "Digital Electronics Lab", teacher: "T004", room: "R008", type: "lab" },
+            { subject: "Club Activity", teacher: "", room: "Auditorium", type: "other" }
+        ],
+        Friday: [
+            { subject: "Data Structures", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Discrete Mathematics", teacher: "T002", room: "R002", type: "theory" },
+            { subject: "Digital Electronics", teacher: "T004", room: "R004", type: "theory" },
+            { subject: "Object Oriented Programming", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Tutorial", teacher: "T002", room: "R002", type: "tutorial" },
+            { subject: "Project Work", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Mentor Session", teacher: "", room: "R005", type: "other" }
+        ],
+        Saturday: [
+            { subject: "Data Structures Lab", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Digital Electronics Lab", teacher: "T004", room: "R008", type: "lab" },
+            { subject: "Object Oriented Programming Lab", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Communication Skills", teacher: "T003", room: "R005", type: "theory" },
+            { subject: "Tutorial", teacher: "T004", room: "R004", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ]
+    }
+},
+"2-IT-B": {
+    department: "IT",
+    year: 2,
+    division: "B",
+    schedule: {
+        Monday: [
+            { subject: "Database Management Systems", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "DBMS Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Computer Networks", teacher: "T001", room: "R002", type: "theory" },
+            { subject: "Operating Systems", teacher: "T003", room: "R004", type: "theory" },
+            { subject: "OS Lab", teacher: "T003", room: "R003", type: "lab" },
+            { subject: "Soft Skills", teacher: "T004", room: "R005", type: "theory" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ],
+        Tuesday: [
+            { subject: "Computer Networks", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Database Management Systems", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Computer Networks Lab", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Operating Systems", teacher: "T003", room: "R004", type: "theory" },
+            { subject: "Workshop", teacher: "T005", room: "WS001", type: "lab" },
+            { subject: "Web Technologies Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Sports", teacher: "", room: "Ground", type: "other" }
+        ],
+        Wednesday: [
+            { subject: "Database Management Systems", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Computer Networks", teacher: "T001", room: "R002", type: "theory" },
+            { subject: "OS Lab", teacher: "T003", room: "R003", type: "lab" },
+            { subject: "Web Technologies", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Soft Skills", teacher: "T004", room: "R005", type: "theory" },
+            { subject: "Tutorial", teacher: "T001", room: "R001", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" }
+        ],
+        Thursday: [
+            { subject: "Computer Networks", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "DBMS Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Operating Systems", teacher: "T003", room: "R004", type: "theory" },
+            { subject: "Web Technologies Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Soft Skills Lab", teacher: "T004", room: "R002", type: "lab" },
+            { subject: "Computer Networks Lab", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Club Activity", teacher: "", room: "Auditorium", type: "other" }
+        ],
+        Friday: [
+            { subject: "Database Management Systems", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Computer Networks", teacher: "T001", room: "R002", type: "theory" },
+            { subject: "Operating Systems", teacher: "T003", room: "R004", type: "theory" },
+            { subject: "Web Technologies", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Tutorial", teacher: "T003", room: "R002", type: "tutorial" },
+            { subject: "Project Work", teacher: "T001", room: "R003", type: "lab" },
+            { subject: "Mentor Session", teacher: "", room: "R005", type: "other" }
+        ],
+        Saturday: [
+            { subject: "DBMS Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "OS Lab", teacher: "T003", room: "R003", type: "lab" },
+            { subject: "Web Technologies Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Soft Skills", teacher: "T004", room: "R005", type: "theory" },
+            { subject: "Tutorial", teacher: "T004", room: "R004", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ]
+    }
+},
+"1-IT-B": {
+    department: "IT",
+    year: 1,
+    division: "B",
+    schedule: {
+        Monday: [
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Physics", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Programming Basics", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "English", teacher: "T004", room: "R002", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Engineering Drawing", teacher: "T005", room: "R004", type: "theory" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ],
+        Tuesday: [
+            { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
+            { subject: "Chemistry", teacher: "T006", room: "R006", type: "lab" },
+            { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Workshop", teacher: "T005", room: "WS001", type: "lab" },
+            { subject: "Physics", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Sports", teacher: "", room: "Ground", type: "other" }
+        ],
+        Wednesday: [
+            { subject: "Chemistry", teacher: "T006", room: "R002", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Programming Basics Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
+            { subject: "English", teacher: "T004", room: "R005", type: "theory" },
+            { subject: "Tutorial", teacher: "T001", room: "R001", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" }
+        ],
+        Thursday: [
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Physics Lab", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Chemistry", teacher: "T006", room: "R004", type: "theory" },
+            { subject: "English Lab", teacher: "T004", room: "R002", type: "lab" },
+            { subject: "Chemistry Lab", teacher: "T006", room: "R006", type: "lab" },
+            { subject: "Club Activity", teacher: "", room: "Auditorium", type: "other" }
+        ],
+        Friday: [
+            { subject: "Physics", teacher: "T003", room: "R002", type: "theory" },
+            { subject: "Chemistry", teacher: "T006", room: "R001", type: "theory" },
+            { subject: "Mathematics-I", teacher: "T001", room: "R001", type: "theory" },
+            { subject: "Programming Basics", teacher: "T002", room: "R001", type: "theory" },
+            { subject: "Tutorial", teacher: "T003", room: "R002", type: "tutorial" },
+            { subject: "Engineering Drawing Lab", teacher: "T005", room: "R004", type: "lab" },
+            { subject: "Mentor Session", teacher: "", room: "R005", type: "other" }
+        ],
+        Saturday: [
+            { subject: "Physics Lab", teacher: "T003", room: "R005", type: "lab" },
+            { subject: "Chemistry Lab", teacher: "T006", room: "R006", type: "lab" },
+            { subject: "Programming Basics Lab", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "English", teacher: "T004", room: "R002", type: "theory" },
+            { subject: "Tutorial", teacher: "T006", room: "R004", type: "tutorial" },
+            { subject: "Project Work", teacher: "T002", room: "R003", type: "lab" },
+            { subject: "Library", teacher: "", room: "LIB", type: "other" }
+        ]
+    }
+}
                     },
                     
                     // Room bookings
@@ -290,15 +509,22 @@ const DataManager = {
     },
     
     // Update timetable
-    updateTimetable: function(instituteCode, year, department, division, timetable) {
-        const institutes = JSON.parse(localStorage.getItem('institutes') || '{}');
-        if (!institutes[instituteCode]) return false;
-        
-        const key = `${year}-${department}-${division}`;
-        institutes[instituteCode].timetables[key] = timetable;
+    // Update timetable
+updateTimetable: function(instituteCode, year, department, division, timetable) {
+    const institutes = JSON.parse(localStorage.getItem('institutes') || '{}');
+    if (!institutes[instituteCode]) return false;
+    
+    const key = `${year}-${department}-${division}`;
+    institutes[instituteCode].timetables[key] = timetable;
+    
+    try {
         localStorage.setItem('institutes', JSON.stringify(institutes));
         return true;
-    },
+    } catch (error) {
+        console.error('Failed to save timetable:', error);
+        return false;
+    }
+},
     
     // Get all timetables
     getAllTimetables: function(instituteCode) {
@@ -451,7 +677,7 @@ const DataManager = {
             const schedule = timetable.schedule || {};
             
             Object.entries(schedule).forEach(([day, periods]) => {
-                periods.forEach((period, index) => {
+               periods.forEach((period, index) => {
                     if (period.subject) {
                         csv += `${year},${department},${division},${day},${index + 1},${period.subject},${period.teacher},${period.room}\n`;
                     }
@@ -469,3 +695,10 @@ if (typeof window !== 'undefined') {
         DataManager.initSampleData();
     });
 }
+// Check if timetable exists for student1
+const student1Timetable = DataManager.getTimetable('INST001', 2, 'CS', 'A');
+console.log('Student 1 Timetable:', student1Timetable);
+
+// Check if timetable exists for student2  
+const student2Timetable = DataManager.getTimetable('INST001', 2, 'IT', 'B');
+console.log('Student 2 Timetable:', student2Timetable);
